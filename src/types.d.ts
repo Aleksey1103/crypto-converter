@@ -1,11 +1,16 @@
+type CurrencyStat = {
+    value: string
+    direction: string
+}
+
 type CurrencyItemType = {
-    name: string
-    /*rank: string
-    name: string
+    '7d'?: CurrencyStat
+    '24h'?: CurrencyStat
+    coin: string
+    coinId: string
+    graph?: string
+    href: string
+    logo?: string
     price: string
-    "1 Day change": string
-    "7 days change": string
-    "30 days change": string
-    marketCap: string
-    volume: string*/
+    symbol: string
 }

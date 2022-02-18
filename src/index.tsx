@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 // Components
 import App from '@/src/components/App';
 import {ThemeProvider} from "@mui/material/styles";
+import {ApplicationContextProvider} from "@/src/context";
 
 // Theme
 import theme from '@/src/theme'
@@ -14,7 +15,9 @@ import '@/src/styles/index.css';
 ReactDOM.render(
     <ThemeProvider theme={theme}>
         <React.StrictMode>
-            <App/>
+            <ApplicationContextProvider>
+                <App/>
+            </ApplicationContextProvider>
         </React.StrictMode>
     </ThemeProvider>,
     document.getElementById('root')
