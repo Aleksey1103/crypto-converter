@@ -1,9 +1,9 @@
-type CurrencyStat = {
+export type CurrencyStat = {
     value: string
     direction: string
 }
 
-type CurrencyItemType = {
+export type CurrencyItemType = {
     '7d'?: CurrencyStat
     '24h'?: CurrencyStat
     coin: string

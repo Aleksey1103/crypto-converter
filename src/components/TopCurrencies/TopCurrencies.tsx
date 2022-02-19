@@ -10,6 +10,9 @@ import {useContext} from 'react';
 // Context
 import ApplicationContext, {ApplicationContextType} from "@/src/context";
 
+// Styles
+import SX from './styles';
+
 
 const TopCurrencies:React.FC = () => {
     const {
@@ -22,7 +25,7 @@ const TopCurrencies:React.FC = () => {
             <Typography
                 variant="h2"
                 mt={12.5}
-                sx={{fontSize: 30, textAlign: 'center', color: 'common.white', fontWeight: 400}}
+                sx={SX.title}
             >
                 Top 20 currencies
             </Typography>
@@ -44,12 +47,7 @@ const TopCurrencies:React.FC = () => {
                                 <Skeleton
                                     variant='rectangular'
                                     animation='wave'
-                                    sx={{
-                                        width: '100%',
-                                        height: '100%',
-                                        borderRadius: 2.5,
-                                        bgcolor: 'grey.100'
-                                    }}
+                                    sx={SX.skeleton}
                                 />
                             ) : (
                                 <TopCurrenciesItem item={currencies[i]}/>

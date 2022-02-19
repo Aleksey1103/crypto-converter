@@ -1,5 +1,9 @@
-import CurrenciesService from "@/src/api/currenciesService";
-import httpClient from "@/src/api/httpClient";
+import CurrenciesService from "./currenciesService";
+import httpClient from "./httpClient";
+
+import {CurrencyItemType} from "./types";
+
+export type {CurrencyItemType};
 
 export default {
     CurrenciesService: new CurrenciesService(httpClient)

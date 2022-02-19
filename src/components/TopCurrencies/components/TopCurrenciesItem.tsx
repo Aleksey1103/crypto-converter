@@ -1,5 +1,10 @@
 import React from 'react';
+
+// Components
 import {Grid, Paper} from "@mui/material";
+
+// Types
+import {CurrencyItemType} from "@/src/api";
 
 type TopCurrenciesItemProps = {
     item: CurrencyItemType

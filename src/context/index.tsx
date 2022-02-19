@@ -6,6 +6,9 @@ import {createContext, useState, useEffect} from 'react';
 // Api
 import api from '@/src/api';
 
+// Types
+import {CurrencyItemType} from "@/src/api";
+
 type ContextMethod<T> = (arg:T) => void
 
 export type ApplicationContextType = {

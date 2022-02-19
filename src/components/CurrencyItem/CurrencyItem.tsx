@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import {Grid, Select, MenuItem, Input, Box, Typography} from "@mui/material";
+import {Grid, Select, MenuItem, Input, Box, Typography, Skeleton} from "@mui/material";
 
 // Hooks
 import {useContext} from "react";
@@ -39,29 +39,38 @@ const CurrencyItem:React.FC<CurrencyItemProps> = (
                     {label}
                 </Typography>
             )}
-            <Box sx={SX.wrapper}>
-                <Select
-                    displayEmpty
-                    value={currency}
-                    onChange={e => setCurrency(e.target.value)}
-                    variant='standard'
-                    sx={SX.select}
-                >
-                    <MenuItem disabled value=''>
-                        <Typography component="span">Choose currency</Typography>
-                    </MenuItem>
-                    {currencies.map(({coin}) => (
-                        <MenuItem key={coin} value={coin}>
-                            <Typography component="span">{coin}</Typography>
-                        </MenuItem>
-                    ))}
-                </Select>
-                <Input
-                    disabled={inputDisabled}
-                    type="number"
-                    sx={SX.input}
+            {isFetching ? (
+                <Skeleton
+                    variant='rectangular'
+                    animation='wave'
+                    component='div'
+                    sx={SX.skeleton}
                 />
-            </Box>
+            ) : (
+                <Box sx={SX.wrapper}>
+                    <Select
+                        displayEmpty
+                        value={currency}
+                        onChange={e => setCurrency(e.target.value)}
+                        variant='standard'
+                        sx={SX.select}
+                    >
+                        <MenuItem disabled value=''>
+                            <Typography component="span">Choose currency</Typography>
+                        </MenuItem>
+                        {currencies.map(({coin}) => (
+                            <MenuItem key={coin} value={coin}>
+                                <Typography component="span">{coin}</Typography>
+                            </MenuItem>
+                        ))}
+                    </Select>
+                    <Input
+                        disabled={inputDisabled}
+                        type="number"
+                        sx={SX.input}
+                    />
+                </Box>
+            )}
         </Grid>
     )
 };
