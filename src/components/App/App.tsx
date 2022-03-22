@@ -5,6 +5,8 @@ import {Box, Container} from '@mui/material';
 import Header from '@components/Header';
 import Converter from '@components/Converter';
 import TopCurrencies from '@components/TopCurrencies';
+import ModalWindow from "@components/ModalWindow";
+
 
 const App: React.FC = () => {
     return (
@@ -22,6 +24,7 @@ const App: React.FC = () => {
                 <Header/>
                 <Converter/>
                 <TopCurrencies/>
+                <ModalWindow/>
             </Container>
         </Box>
     );

@@ -1,4 +1,6 @@
+// Types
 import {AxiosInstance} from "axios";
+import {CurrencyItemType} from "./types";
 
 class CurrenciesService {
     readonly httpClient: AxiosInstance

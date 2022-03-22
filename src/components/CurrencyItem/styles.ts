@@ -10,6 +10,13 @@ const select:SxProps<Theme> = theme => ({
 const input:SxProps<Theme> = () => ({
     width: 130,
     borderRadius: '0 10px 10px 0',
+    input: {
+        textAlign: 'center',
+        color: 'common.black',
+        '&.Mui-disabled': {
+            WebkitTextFillColor: 'unset',
+        }
+    },
 });
 
 const wrapper:SxProps<Theme> = () => ({

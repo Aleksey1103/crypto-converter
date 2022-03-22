@@ -2,7 +2,7 @@ import {SxProps} from "@mui/material";
 import {Theme} from '@mui/material/styles';
 
 const title:SxProps<Theme> = theme => ({
-    fontSize: 30,
+    fontSize: 28,
     textAlign: 'center',
     color: theme.palette.common.white,
     fontWeight: 400,

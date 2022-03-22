@@ -1,22 +1,36 @@
 import React from 'react';
 
 // Components
-import  {Button, Grid} from "@mui/material";
+import  {Button, Grid, CircularProgress } from "@mui/material";
 import CurrencyItem from "@components/CurrencyItem";
 
 // Hooks
-import {useState} from "react";
+import {useState, useContext} from "react";
+
+// Context
+import ApplicationContext, {ApplicationContextType} from "@/src/context";
 
 const Converter:React.FC = () => {
     const [currencyIn, _setCurrencyIn] = useState<string>('');
     const [currencyOut, _setCurrencyOut] = useState<string>('');
-    
+    const [quantityIn, _setQuantityIn] = useState<number>(1);
+
+    const {rate, convert, isConverting} = useContext<ApplicationContextType>(ApplicationContext);
+
     const setCurrencyIn = (currency: string):void => {
         _setCurrencyIn(currency)
     }
 
     const setCurrencyOut = (currency: string):void => {
         _setCurrencyOut(currency)
+    }
+
+    const setQuantityIn = (value:number):void => {
+        _setQuantityIn(value);
+    }
+
+    const handleBtnConvertClick = () => {
+        convert({currencyIn, quantityIn, currencyOut});
     }
     
     return (
@@ -29,22 +43,30 @@ const Converter:React.FC = () => {
         >
             <CurrencyItem
                 currency={currencyIn}
+                inputValue={quantityIn}
+                setInputValue={setQuantityIn}
                 setCurrency={setCurrencyIn}
                 label="You sent"
             />
             <CurrencyItem 
                 currency={currencyOut}
+                inputValue={rate}
                 setCurrency={setCurrencyOut}
-                label="You receive" 
+                label="You receive"
+                isResponseHolder={true}
                 inputDisabled={true}
             />
             <Button
                 variant="contained"
                 size="small"
-                sx={{boxShadow: 8}}
+                sx={{
+                    width: 180,
+                    boxShadow: 8,
+                }}
                 disabled={!currencyIn || !currencyOut}
+                onClick={handleBtnConvertClick}
             >
-                Convert
+                {isConverting ? <CircularProgress /> : 'Convert'}
             </Button>
         </Grid>
     );
