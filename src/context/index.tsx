@@ -56,13 +56,18 @@ const ApplicationContextProvider:React.FC = ({children}) => {
             .then((rate) => {
                 if(rate === Infinity) {
                     showErrorModal('rateError');
+                    _setRate(null);
                 } else {
                     _setRate(rate);
                 }
             })
             .catch(err => {
-                showErrorModal('connectionError');
-                console.log(err);
+                if(err.response.status == 429) {
+                    showErrorModal('requestQuantityError')
+                } else {
+                    showErrorModal('connectionError');
+                }
+                console.error(err);
             })
             .finally(() => _setIsConverting(false))
     }

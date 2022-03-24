@@ -43,6 +43,12 @@ const ModalWindow:FC = () => {
                     text: 'Unfortunately this kind of converting is not possible. Please change the received currency.'
                 })
                 break;
+            case 'requestQuantityError':
+                setModalContent({
+                    title: 'Too many requests',
+                    text: 'You have exceeded the rate limit per minute. Please wait a bit.',
+                })
+                break;
         }
 
     }, [errorModalState])
