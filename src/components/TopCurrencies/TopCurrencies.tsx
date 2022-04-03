@@ -24,14 +24,14 @@ const TopCurrencies:React.FC = () => {
         <>
             <Typography
                 variant="h2"
-                mt={12.5}
+                mt={{xs: 9, sm: 12.5}}
                 sx={SX.title}
             >
                 Top 20 currencies
             </Typography>
             <Grid container
-                  spacing={2}
-                  mt={5}
+                  spacing={{xs: 1, md: 2}}
+                  sx={SX.container}
                   justifyContent='center'
             >
                 {Array(20).fill(null).map((item, i) => {
@@ -40,8 +40,7 @@ const TopCurrencies:React.FC = () => {
                             key={i}
                             item
                             container
-                            xs={3}
-                            height={98}
+                            sx={SX.item}
                         >
                             {isFetching ? (
                                 <Skeleton

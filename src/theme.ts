@@ -9,6 +9,15 @@ declare module '@mui/material/styles' {
     interface TypographyVariantsOptions {
         label?: React.CSSProperties;
     }
+
+    interface BreakpointOverrides {
+        xs: true;
+        xsm: true;
+        sm: true;
+        md: true;
+        lg: true;
+        xl: true;
+    }
 }
 
 declare module '@mui/material/Typography' {
@@ -27,6 +36,10 @@ const theme = createTheme({
             main: '#C9ADEC',
         }
     },
+    breakpoints: {
+        keys: ['xs', 'xsm', 'sm', 'md', 'lg', 'xl'],
+        values: {xs: 0, xsm: 375, sm: 600, md: 900, lg: 1200, xl: 1536}
+    }
 });
 
 const customTheme = createTheme(theme, {
@@ -57,10 +70,17 @@ const customTheme = createTheme(theme, {
                     '&::before, &::after': {
                         display: 'none'
                     },
+                    [theme.breakpoints.down('xsm')]: {
+                        height: 50,
+                    }
                 },
                 input: {
                     paddingLeft: 16,
                     paddingRight: 16,
+                    [theme.breakpoints.down('xsm')]: {
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                    }
                 }
             }
         },
@@ -71,13 +91,19 @@ const customTheme = createTheme(theme, {
                     lineHeight: '20px',
                     '&:focus': {
                         backgroundColor: 'transparent'
-                    }
+                    },
+                    [theme.breakpoints.down('xsm')]: {
+                        padding: '11px 14px 13px'
+                    },
                 },
                 icon: {
                     color: theme.palette.primary.main,
                     right: 11,
                     fontSize: 28,
-                }
+                    [theme.breakpoints.down('xsm')]: {
+                        right: 2,
+                    },
+                },
             }
         },
         MuiButton: {
@@ -92,6 +118,12 @@ const customTheme = createTheme(theme, {
                     lineHeight: '22px',
                     textTransform: 'initial',
                     color: theme.palette.common.white,
+                    [theme.breakpoints.down('xsm')]: {
+                        height: 50,
+                        width: 170,
+                        fontSize: 18,
+                        lineHeight: '20px'
+                    }
                 }
             }
         }

@@ -9,20 +9,27 @@ import api from '@/src/api';
 // Types
 import {CurrencyItemType, ConverterArgType} from "@/src/api";
 
+// Fixtures
+import errorMessagesMap from "./errorMassages";
+
 type ContextMethod<T> = (arg:T) => void
 
-type ErrorModalType = {
+type ErrorModalState = {
     open: boolean
     type: string
+    title: string
+    text: string
 }
 
 export type ApplicationContextType = {
     isFetching: boolean
-    errorModalState: ErrorModalType
+    openErrorModal: boolean
+    errorModalState: ErrorModalState
     currencies: CurrencyItemType[] | []
     rate: number | null
     isConverting: boolean
     convert: ContextMethod<ConverterArgType>
+    closeErrorModal: () => void
     setIsFetching: ContextMethod<boolean>
     setCurrencies: ContextMethod<CurrencyItemType[] | []>
     showErrorModal: ContextMethod<string>
@@ -32,7 +39,8 @@ const ApplicationContext = createContext<ApplicationContextType>({} as Applicati
 
 const ApplicationContextProvider:React.FC = ({children}) => {
     const [isFetching, _setIsFetching] = useState<boolean>(true);
-    const [errorModalState, _setErrorModalState] = useState<ErrorModalType>({open: false, type: ''});
+    const [openErrorModal, _setOpenErrorModal] = useState<boolean>(false);
+    const [errorModalState, _setErrorModalState] = useState<ErrorModalState>({} as ErrorModalState);
     const [currencies, _setCurrencies] = useState<CurrencyItemType[] | []>([]);
     const [rate, _setRate] = useState<number | null>(null);
     const [isConverting, _setIsConverting] = useState<boolean>(false);
@@ -42,11 +50,21 @@ const ApplicationContextProvider:React.FC = ({children}) => {
     }
 
     const showErrorModal:ContextMethod<string> = (type) => {
-        _setErrorModalState({open: true, type})
+        _setOpenErrorModal(true);
+        _setErrorModalState({
+            open: true,
+            type,
+            title: errorMessagesMap[type].title,
+            text: errorMessagesMap[type].text,
+        })
     }
 
     const setCurrencies:ContextMethod<CurrencyItemType[] | []> = (array) => {
         _setCurrencies(array)
+    }
+
+    const closeErrorModal = ():void => {
+        _setOpenErrorModal(false);
     }
 
     const convert = ({currencyIn, quantityIn, currencyOut}:ConverterArgType) => {
@@ -88,11 +106,13 @@ const ApplicationContextProvider:React.FC = ({children}) => {
         <ApplicationContext.Provider
             value={{
                 isFetching,
+                openErrorModal,
                 errorModalState,
                 currencies,
                 rate,
                 isConverting,
                 convert,
+                closeErrorModal,
                 setIsFetching,
                 setCurrencies,
                 showErrorModal,

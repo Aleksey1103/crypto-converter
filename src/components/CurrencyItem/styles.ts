@@ -1,14 +1,26 @@
 import {SxProps} from "@mui/material";
 import {Theme} from '@mui/material/styles';
 
+const item:SxProps<Theme> = () => ({
+    mt: {xs: 3, sm: 4, md: 0},
+    width: '100%',
+    maxWidth: 396,
+})
+
+const wrapper:SxProps<Theme> = () => ({
+    display: 'flex',
+    boxShadow: 8,
+    borderRadius: 2.5,
+})
+
 const select:SxProps<Theme> = theme => ({
-    width: 266,
+    width: `${100*266/396}%`,
     borderRadius: '10px 0 0 10px',
     borderColor: theme.palette.primary.main,
 });
 
 const input:SxProps<Theme> = () => ({
-    width: 130,
+    width: `${100*130/396}%`,
     borderRadius: '0 10px 10px 0',
     input: {
         textAlign: 'center',
@@ -19,16 +31,14 @@ const input:SxProps<Theme> = () => ({
     },
 });
 
-const wrapper:SxProps<Theme> = () => ({
-    boxShadow: 8,
-    borderRadius: 2.5,
-})
-
 const skeleton:SxProps<Theme> = theme => ({
-    width: 396,
+    width: '100%',
     height: 60,
     borderRadius: 2.5,
-    bgcolor: theme.palette.grey["100"]
+    bgcolor: theme.palette.grey["100"],
+    [theme.breakpoints.down('xsm')]: {
+        height: 50,
+    },
 })
 
-export default {select, input, wrapper, skeleton};
+export default {item, wrapper, select, input, skeleton};

@@ -36,8 +36,9 @@ const Converter:React.FC = () => {
     return (
         <Grid container
               sx={{
-                  padding: '100px 63px 0',
-                  justifyContent: 'space-between',
+                  pt: {xs: 3, sm: 6, md: 12.5},
+                  px: {xs: 0, lg: '63px'},
+                  justifyContent: {xs: 'center', md: 'space-between'},
                   alignItems: 'flex-end',
               }}
         >
@@ -62,6 +63,8 @@ const Converter:React.FC = () => {
                 sx={{
                     width: 180,
                     boxShadow: 8,
+                    mt: {xs: 4, sm: 4, lg: 0},
+                    ml: {xs: 0, md: 'auto', lg: 0},
                 }}
                 disabled={!currencyIn || !currencyOut}
                 onClick={handleBtnConvertClick}

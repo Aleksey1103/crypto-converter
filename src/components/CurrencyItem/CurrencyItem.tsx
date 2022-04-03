@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import {Grid, Select, MenuItem, Input, Box, Typography, Skeleton} from "@mui/material";
+import {Grid, Select, MenuItem, Input, Box, Typography, Skeleton, SelectChangeEvent} from "@mui/material";
 
 // Hooks
 import {useContext} from "react";
@@ -35,17 +35,27 @@ const CurrencyItem:React.FC<CurrencyItemProps> = (
 ) => {
     const {
         isFetching,
+        isConverting,
         currencies
     } = useContext<ApplicationContextType>(ApplicationContext);
 
+    const handleSelectChange = (e:SelectChangeEvent) => {
+        setCurrency(e.target.value)
+    }
+
     const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        if(isConverting) return false;
+
         if(setInputValue) {
             setInputValue(Number(e.target.value));
         }
     }
 
     return (
-        <Grid item>
+        <Grid
+            item
+            sx={SX.item}
+        >
             {label && (
                 <Typography variant="label" component="p">
                     {label}
@@ -63,7 +73,8 @@ const CurrencyItem:React.FC<CurrencyItemProps> = (
                     <Select
                         displayEmpty
                         value={currency}
-                        onChange={e => setCurrency(e.target.value)}
+                        disabled={isConverting}
+                        onChange={handleSelectChange}
                         variant='standard'
                         sx={SX.select}
                         MenuProps={{sx: {maxHeight: 400,}}}
@@ -83,7 +94,7 @@ const CurrencyItem:React.FC<CurrencyItemProps> = (
                         ))}
                     </Select>
                     <Input
-                        disabled={inputDisabled}
+                        disabled={inputDisabled || isConverting}
                         value={inputValue??''}
                         onChange={handleInputChange}
                         type="number"

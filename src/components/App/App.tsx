@@ -13,14 +13,20 @@ const App: React.FC = () => {
         <Box
             sx={{
                 minHeight: '100vh',
-                background: [
-                    'url("images/lines.svg") top center / 100% auto no-repeat',
-                    'linear-gradient(298.42deg, #2F9EC0 0.29%, #2BB49B 104.46%)',
-                ].join(', '),
-                pb: 12.5
+                background: {
+                    xs: [
+                        'url("images/lines_v.svg") center 15% / 100% auto no-repeat',
+                        'linear-gradient(298.42deg, #2F9EC0 0.29%, #2BB49B 104.46%)',
+                    ].join(', '),
+                    md: [
+                        'url("images/lines.svg") top center / 100% auto no-repeat',
+                        'linear-gradient(298.42deg, #2F9EC0 0.29%, #2BB49B 104.46%)',
+                    ].join(', ')
+                },
+                pb: {xs: 9, md: 12.5},
             }}
         >
-            <Container>
+            <Container fixed>
                 <Header/>
                 <Converter/>
                 <TopCurrencies/>

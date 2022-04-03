@@ -5,7 +5,7 @@ import {Box, Typography, Modal, IconButton} from '@mui/material';
 import {ReactComponent as IconClose} from '@/src/images/close.svg';
 
 // Hooks
-import {useState, useEffect, useContext} from "react";
+import  {useContext} from "react";
 
 // Context
 import ApplicationContext from "@/src/context";
@@ -18,45 +18,16 @@ import {ApplicationContextType} from "@/src/context";
 import SX from './styles';
 
 const ModalWindow:FC = () => {
-    const {errorModalState} = useContext<ApplicationContextType>(ApplicationContext);
-    const [open, setOpen] = useState<boolean>(errorModalState.open);
-    const [modalContent, setModalContent] = useState<{title: string, text: string}>({title: '', text: ''})
-    
-    const handleClose = ():void => setOpen(false);
-    
-    useEffect(() => {
-        if(errorModalState) {
-            setOpen(errorModalState.open)
-        }
-
-        switch (errorModalState.type) {
-            case 'connectionError':
-                setModalContent({
-                    title: 'Connection Error',
-                    text: 'Something went wrong. Please reload the application and try again.'
-                });
-                break;
-
-            case 'rateError':
-                setModalContent({
-                    title: 'Converting Error',
-                    text: 'Unfortunately this kind of converting is not possible. Please change the received currency.'
-                })
-                break;
-            case 'requestQuantityError':
-                setModalContent({
-                    title: 'Too many requests',
-                    text: 'You have exceeded the rate limit per minute. Please wait a bit.',
-                })
-                break;
-        }
-
-    }, [errorModalState])
+    const {
+        openErrorModal,
+        errorModalState,
+        closeErrorModal
+    } = useContext<ApplicationContextType>(ApplicationContext);
 
     return (
         <Modal
-            open={open}
-            onClose={handleClose}
+            open={openErrorModal}
+            onClose={closeErrorModal}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
@@ -72,17 +43,17 @@ const ModalWindow:FC = () => {
                         component="h2"
                         sx={{lineHeight: '34px'}}
                     >
-                        {modalContent.title}
+                        {errorModalState.title}
                     </Typography>
                     <IconButton
                         sx={{ml: 2}}
-                        onClick={handleClose}
+                        onClick={closeErrorModal}
                     >
                         <IconClose/>
                     </IconButton>
                 </Box>
                 <Typography sx={{ mt: 2 }}>
-                    {modalContent.text}
+                    {errorModalState.text}
                 </Typography>
 
             </Box>
