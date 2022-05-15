@@ -24,7 +24,7 @@ const TopCurrenciesItem:React.FC<TopCurrenciesItemProps> = ({item: {logo, coin}}
             }}
         >
             <Grid item xs={4} sx={{textAlign: 'center'}}>
-                <img width="30" src={logo ?? '/images/default-logo.svg'} alt={coin}/>
+                <img width="30" src={logo ?? 'images/default-logo.svg'} alt={coin}/>
             </Grid>
             <Grid component="span" item xs={8}>{coin}</Grid>
         </Grid>
