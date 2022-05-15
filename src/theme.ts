@@ -128,7 +128,6 @@ const customTheme = createTheme(theme, {
             }
         }
     }
-})
+});
 
 export default customTheme;
-

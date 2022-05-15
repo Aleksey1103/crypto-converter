@@ -6,7 +6,9 @@ import {CurrencyItemType} from "./types";
 
 export type {CurrencyItemType, ConverterArgType};
 
-export default {
+const Api = {
     CurrenciesService: new CurrenciesService(httpClient),
     ConverterService: new ConverterService(httpClient)
-}
+};
+
+export default Api;
