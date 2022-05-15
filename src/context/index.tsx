@@ -80,7 +80,7 @@ const ApplicationContextProvider:React.FC = ({children}) => {
                 }
             })
             .catch(err => {
-                if(err.response.status == 429) {
+                if(err.response.status === 429) {
                     showErrorModal('requestQuantityError')
                 } else {
                     showErrorModal('connectionError');

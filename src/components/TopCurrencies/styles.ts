@@ -40,4 +40,6 @@ const skeleton:SxProps<Theme> = theme => ({
     bgcolor: theme.palette.grey['100']
 })
 
-export default {container, item, title, skeleton};
+const SX = {container, item, title, skeleton};
+
+export default SX;

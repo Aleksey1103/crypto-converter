@@ -41,4 +41,6 @@ const skeleton:SxProps<Theme> = theme => ({
     },
 })
 
-export default {item, wrapper, select, input, skeleton};
+const SX = {item, wrapper, select, input, skeleton};
+
+export default SX;

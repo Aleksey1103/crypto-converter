@@ -16,4 +16,6 @@ const wrapper:SxProps<Theme> = {
     outline: 'none'
 };
 
-export default {wrapper};
+const SX = {wrapper}
+
+export default SX;
