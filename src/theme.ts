@@ -130,5 +130,5 @@ const customTheme = createTheme(theme, {
     }
 });
 
-export default customTheme;
+export {customTheme as theme};
 
