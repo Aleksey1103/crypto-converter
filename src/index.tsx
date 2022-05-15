@@ -7,7 +7,7 @@ import {ThemeProvider} from "@mui/material/styles";
 import {ApplicationContextProvider} from "@/src/context";
 
 // Theme
-import theme from '@/src/theme'
+import {theme} from '@/src/theme'
 
 // Styles
 import '@/src/styles/index.css';
